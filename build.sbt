@@ -1,7 +1,5 @@
 import sbt.Keys.libraryDependencies
 
-version := "0.1"
-
 ThisBuild / organization := "com.hiya"
 ThisBuild / scalacOptions ++= Seq("-Xfatal-warnings", "-Xlint","-deprecation","-feature","-unchecked")
 ThisBuild / crossScalaVersions := Seq("2.11.12", "2.12.8", "2.13.1")
