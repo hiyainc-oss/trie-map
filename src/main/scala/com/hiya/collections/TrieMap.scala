@@ -103,7 +103,7 @@ object TrieMap {
 
   private def dump[K, V](map: TrieMap[K, V], depth: Int = 0): String = {
     val tabs = "\t" * depth
-    map.value.getOrElse("") + ": " + map.children.map{ case (k, m) => s"\n$tabs$k -> ${dump(m, depth + 1)}"}.mkString
+    map.value.getOrElse("").toString + ": " + map.children.map{ case (k, m) => s"\n$tabs$k -> ${dump(m, depth + 1)}"}.mkString
   }
 
   @tailrec
