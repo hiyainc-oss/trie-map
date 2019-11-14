@@ -49,18 +49,18 @@ final case class TrieMap[K, V](value: Option[V], children: HashMap[K, TrieMap[K,
    *                     .insert("another", 2)
    *         println(map.dump)
    *             outputs:
-   *              :
-   *              4 -> :
-   *                4 -> :
-   *                  / -> :
-   *                    5 -> :
-   *                      6 -> :
-   *                        7 -> 2:
-   *              1 -> :
-   *                / -> :
-   *                  1 -> :
-   *                    2 -> :
-   *                      3 -> 1:
+   *          """:
+   *          a -> :
+   *          	n -> :
+   *          		o -> :
+   *          			t -> :
+   *          				h -> :
+   *          					e -> :
+   *          						r -> 2:
+   *          p -> :
+   *          	r -> :
+   *          		e -> 1: """
+   *
    */
   def dump: String = TrieMap.dump(this)
 }
@@ -69,7 +69,8 @@ object TrieMap {
 
   /**
    * Creates an empty TrieMap
-   * @tparam T The type of the values stored in it
+   * @tparam K The type of the keys stored in it
+   * @tparam V The type of the values stored in it
    * @return The empty TrieMap
    */
   def empty[K, V]: TrieMap[K, V] = TrieMap[K, V](None, HashMap.empty[K, TrieMap[K, V]])
@@ -77,7 +78,8 @@ object TrieMap {
   /**
    * Builds a TrieMap from a Map of String prefixes (keys) and the values associated with them
    * @param values The Map which contains the keys and the values
-   * @tparam T The type of the values
+   * @tparam K The type of the keys
+   * @tparam V The type of the values
    * @return The TrieMap containing the String prefixes and values
    */
   def build[K, V](values: Map[Seq[K], V]): TrieMap[K, V] = {

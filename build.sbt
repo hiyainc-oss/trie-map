@@ -1,5 +1,7 @@
 import sbt.Keys.libraryDependencies
 
+version := "0.1"
+
 ThisBuild / organization := "com.hiya"
 ThisBuild / scalacOptions ++= Seq("-Xfatal-warnings", "-Xlint","-deprecation","-feature","-unchecked")
 ThisBuild / crossScalaVersions := Seq("2.11.12", "2.12.8", "2.13.1")
@@ -12,4 +14,9 @@ lazy val `trie-map` = (project in file("."))
       )
     )
 
-
+licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
+bintrayRepository := "maven"
+bintrayOrganization := Some("hiyainc-oss")
+bintrayReleaseOnPublish in ThisBuild := false
+resolvers += Resolver.bintrayRepo("hiyainc-oss", "maven")
+bintrayPackageLabels := Seq("scala", "collection")
