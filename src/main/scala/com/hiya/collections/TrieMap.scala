@@ -63,6 +63,14 @@ final case class TrieMap[K, V](value: Option[V], children: HashMap[K, TrieMap[K,
    *
    */
   def dump: String = TrieMap.dump(this)
+
+
+  /**
+   * A method which converts the TrieMap to a scala collection Map by concatenating the keys together.
+   * Useful for serialization.
+   * @return The Map containing the keys, concatenated.
+   */
+  def toMap: Map[Seq[K], V] = TrieMap.toMap(this)
 }
 
 object TrieMap {
@@ -86,6 +94,16 @@ object TrieMap {
     values.foldLeft(empty[K, V]) { case (map, (key, value)) =>
       insert(map, key, value)
     }
+  }
+
+  private def toMap[K, V](map: TrieMap[K, V]): Map[Seq[K], V] = {
+    def toMap(map: TrieMap[K, V], prefix: Seq[K]): Map[Seq[K], V] = {
+        map.value.map(v => prefix -> v).toMap ++
+          map.children.flatMap { case (k, trie) =>
+          toMap(trie, prefix :+ k)
+        }
+      }
+    toMap(map, Seq.empty[K])
   }
 
   private def insert[K, V](map: TrieMap[K, V], key: Seq[K], value: V): TrieMap[K, V] = {

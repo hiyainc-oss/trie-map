@@ -69,5 +69,11 @@ class TrieMapTests extends FunSpec with Matchers {
         TrieMap.build(prefixes) shouldBe TrieMap.empty[Char, Int].insert("pre", 1).insert("pref", 2)
       }
     }
+    describe("toMap"){
+      it("should convert TrieMap to ordinary Map"){
+        val prefixes = Map[Seq[Char], Int]("pre".toSeq -> 1, "pref".toSeq -> 2)
+        TrieMap.build(prefixes).toMap shouldBe prefixes
+      }
+    }
   }
 }
